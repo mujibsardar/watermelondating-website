@@ -9,7 +9,7 @@ services:
       corepack enable
       pnpm install --no-frozen-lockfile
       pnpm build
-    startCommand: pnpm start -- -p $PORT
+    startCommand: pnpm exec next start -p $PORT
     envVars:
       - key: NODE_ENV
         value: production
