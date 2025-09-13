@@ -1,7 +1,29 @@
+"use client"
+
+import type React from "react"
+
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import { useState } from "react"
 
 export default function HomePage() {
+  const [showWaitlistModal, setShowWaitlistModal] = useState(false)
+  const [showTalentModal, setShowTalentModal] = useState(false)
+
+  const handleWaitlistSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Handle waitlist form submission
+    setShowWaitlistModal(false)
+    alert("Thank you for joining the waitlist!")
+  }
+
+  const handleTalentSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Handle talent waitlist form submission
+    setShowTalentModal(false)
+    alert("Thank you for joining the talent waitlist!")
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-100 via-pink-50 to-coral-200">
       {/* Header */}
@@ -36,10 +58,17 @@ export default function HomePage() {
         </nav>
 
         <div className="flex items-center gap-4">
-          <button className="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-md shadow-lg transition-colors">
+          <button
+            onClick={() => setShowWaitlistModal(true)}
+            className="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-md shadow-lg transition-colors"
+          >
             Join the Waitlist
           </button>
-          <Button variant="ghost" className="text-gray-600 hover:text-gray-800">
+          <Button
+            variant="ghost"
+            className="text-gray-600 hover:text-gray-800"
+            onClick={() => setShowTalentModal(true)}
+          >
             Join Talent Waitlist
           </Button>
         </div>
@@ -70,7 +99,10 @@ export default function HomePage() {
               </p>
             </div>
 
-            <button className="bg-red-500 hover:bg-red-600 text-white font-semibold px-8 py-6 text-lg rounded-full shadow-lg transition-colors">
+            <button
+              onClick={() => setShowWaitlistModal(true)}
+              className="bg-red-500 hover:bg-red-600 text-white font-semibold px-8 py-6 text-lg rounded-full shadow-lg transition-colors"
+            >
               Join the Waitlist
             </button>
           </div>
@@ -303,7 +335,7 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="p-8 bg-gradient-to-br from-red-50 to-pink-50 border-0 shadow-lg hover:shadow-xl transition-shadow">
               <div className="text-center space-y-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-pink-400 rounded-2xl flex items-center justify-center mx-auto text-2xl">
+                <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-pink-400 rounded-2xl overflow-hidden mx-auto text-2xl">
                   🌱
                 </div>
                 <h3 className="text-xl font-bold text-gray-800">Co-Creators, Not Users</h3>
@@ -316,7 +348,7 @@ export default function HomePage() {
 
             <Card className="p-8 bg-gradient-to-br from-pink-50 to-red-50 border-0 shadow-lg hover:shadow-xl transition-shadow">
               <div className="text-center space-y-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto text-2xl">
+                <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-red-500 rounded-2xl overflow-hidden mx-auto text-2xl">
                   💝
                 </div>
                 <h3 className="text-xl font-bold text-gray-800">Love with Meaning</h3>
@@ -329,7 +361,7 @@ export default function HomePage() {
 
             <Card className="p-8 bg-gradient-to-br from-red-50 to-coral-50 border-0 shadow-lg hover:shadow-xl transition-shadow">
               <div className="text-center space-y-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-coral-500 rounded-2xl flex items-center justify-center mx-auto text-2xl">
+                <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-coral-500 rounded-2xl overflow-hidden mx-auto text-2xl">
                   🚀
                 </div>
                 <h3 className="text-xl font-bold text-gray-800">Pioneer Status</h3>
@@ -348,7 +380,10 @@ export default function HomePage() {
                 Join the waitlist and become a founding member of a dating platform that puts humanity first, justice at
                 the center, and love as the ultimate force for change.
               </p>
-              <button className="bg-red-500 hover:bg-red-600 text-white font-bold px-8 py-4 rounded-full shadow-lg transition-colors text-lg">
+              <button
+                onClick={() => setShowWaitlistModal(true)}
+                className="bg-red-500 hover:bg-red-600 text-white font-bold px-8 py-4 rounded-full shadow-lg transition-colors text-lg"
+              >
                 Join the Waitlist
               </button>
             </div>
@@ -455,7 +490,10 @@ export default function HomePage() {
                   </div>
 
                   <div className="text-center">
-                    <button className="bg-red-500 hover:bg-red-600 text-white font-bold px-8 py-4 rounded-full shadow-lg transition-colors">
+                    <button
+                      onClick={() => setShowTalentModal(true)}
+                      className="bg-red-500 hover:bg-red-600 text-white font-bold px-8 py-4 rounded-full shadow-lg transition-colors"
+                    >
                       Join the Talent Waitlist
                     </button>
                     <p className="text-gray-500 text-sm mt-3">
@@ -481,10 +519,16 @@ export default function HomePage() {
               illusion, respect over ghosting, safety over toxicity, and love that gives back.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button className="bg-white text-red-600 hover:bg-gray-100 font-bold px-10 py-4 rounded-full shadow-lg transition-colors text-lg">
+              <button
+                onClick={() => setShowWaitlistModal(true)}
+                className="bg-white text-red-600 hover:bg-gray-100 font-bold px-10 py-4 rounded-full shadow-lg transition-colors text-lg"
+              >
                 Join the Waitlist
               </button>
-              <button className="bg-pink-500 hover:bg-pink-600 text-white font-bold px-10 py-4 rounded-full shadow-lg transition-colors text-lg">
+              <button
+                onClick={() => setShowWaitlistModal(true)}
+                className="bg-pink-500 hover:bg-pink-600 text-white font-bold px-10 py-4 rounded-full shadow-lg transition-colors text-lg"
+              >
                 Get Early Access
               </button>
             </div>
@@ -494,6 +538,150 @@ export default function HomePage() {
           </div>
         </section>
       </main>
+
+      {showWaitlistModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-8 max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-2xl font-bold text-gray-800">Join the Waitlist</h3>
+              <button
+                onClick={() => setShowWaitlistModal(false)}
+                className="text-gray-400 hover:text-gray-600 text-2xl"
+              >
+                ×
+              </button>
+            </div>
+
+            <p className="text-gray-600 mb-6">
+              Be among the first to experience love with purpose. Join our waitlist and help us build the future of
+              conscious dating.
+            </p>
+
+            <form onSubmit={handleWaitlistSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                <input
+                  type="text"
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  placeholder="Enter your full name"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                <input
+                  type="email"
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  placeholder="Enter your email"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number (Optional)</label>
+                <input
+                  type="tel"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  placeholder="Enter your phone number"
+                />
+              </div>
+
+              <div className="flex gap-3 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setShowWaitlistModal(false)}
+                  className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors font-semibold"
+                >
+                  Join Waitlist
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {showTalentModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-8 max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-2xl font-bold text-gray-800">Join Our Team</h3>
+              <button onClick={() => setShowTalentModal(false)} className="text-gray-400 hover:text-gray-600 text-2xl">
+                ×
+              </button>
+            </div>
+
+            <p className="text-gray-600 mb-6">
+              Help us build the first values-driven dating app. Join our talent waitlist and be part of a team that's
+              changing the world.
+            </p>
+
+            <form onSubmit={handleTalentSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                <input
+                  type="text"
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  placeholder="Enter your full name"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                <input
+                  type="email"
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  placeholder="Enter your email"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number (Optional)</label>
+                <input
+                  type="tel"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  placeholder="Enter your phone number"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Resume/CV *</label>
+                <input
+                  type="file"
+                  required
+                  accept=".pdf,.doc,.docx"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100"
+                />
+                <p className="text-xs text-gray-500 mt-1">Accepted formats: PDF, DOC, DOCX</p>
+              </div>
+
+              <div className="flex gap-3 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setShowTalentModal(false)}
+                  className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors font-semibold"
+                >
+                  Apply Now
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
