@@ -10,18 +10,34 @@ export default function HomePage() {
   const [showWaitlistModal, setShowWaitlistModal] = useState(false)
   const [showTalentModal, setShowTalentModal] = useState(false)
 
-  const handleWaitlistSubmit = (e: React.FormEvent) => {
+  const handleWaitlistSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // Handle waitlist form submission
-    setShowWaitlistModal(false)
-    alert("Thank you for joining the waitlist!")
+    const form = e.currentTarget
+    const formData = new FormData(form)
+    try {
+      const res = await fetch("/api/waitlist", { method: "POST", body: formData })
+      if (!res.ok) throw new Error("Request failed")
+      setShowWaitlistModal(false)
+      alert("Thank you for joining the waitlist!")
+      form.reset()
+    } catch (err) {
+      alert("Sorry, something went wrong. Please try again.")
+    }
   }
 
-  const handleTalentSubmit = (e: React.FormEvent) => {
+  const handleTalentSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // Handle talent waitlist form submission
-    setShowTalentModal(false)
-    alert("Thank you for joining the talent waitlist!")
+    const form = e.currentTarget
+    const formData = new FormData(form)
+    try {
+      const res = await fetch("/api/talent", { method: "POST", body: formData })
+      if (!res.ok) throw new Error("Request failed")
+      setShowTalentModal(false)
+      alert("Thank you for joining the talent waitlist!")
+      form.reset()
+    } catch (err) {
+      alert("Sorry, something went wrong. Please try again.")
+    }
   }
 
   return (
@@ -563,6 +579,7 @@ export default function HomePage() {
                 <input
                   type="text"
                   required
+                  name="name"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                   placeholder="Enter your full name"
                 />
@@ -573,6 +590,7 @@ export default function HomePage() {
                 <input
                   type="email"
                   required
+                  name="email"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                   placeholder="Enter your email"
                 />
@@ -582,6 +600,7 @@ export default function HomePage() {
                 <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number (Optional)</label>
                 <input
                   type="tel"
+                  name="phone"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                   placeholder="Enter your phone number"
                 />
@@ -628,6 +647,7 @@ export default function HomePage() {
                 <input
                   type="text"
                   required
+                  name="name"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                   placeholder="Enter your full name"
                 />
@@ -638,6 +658,7 @@ export default function HomePage() {
                 <input
                   type="email"
                   required
+                  name="email"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                   placeholder="Enter your email"
                 />
@@ -647,6 +668,7 @@ export default function HomePage() {
                 <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number (Optional)</label>
                 <input
                   type="tel"
+                  name="phone"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                   placeholder="Enter your phone number"
                 />
@@ -657,6 +679,7 @@ export default function HomePage() {
                 <input
                   type="file"
                   required
+                  name="resume"
                   accept=".pdf,.doc,.docx"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100"
                 />
