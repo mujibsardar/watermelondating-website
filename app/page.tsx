@@ -7,8 +7,8 @@ export default function HomePage() {
       {/* Header */}
       <header className="flex items-center justify-between px-6 py-4 bg-white/80 backdrop-blur-sm">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-gradient-to-br from-red-600 via-pink-400 to-coral-400 rounded-full flex items-center justify-center text-lg">
-            🍉
+          <div className="w-8 h-8 rounded-full overflow-hidden">
+            <img src="/logo.png" alt="Watermelon Dating Logo" className="w-full h-full object-cover" />
           </div>
           <div>
             <h1 className="text-xl font-bold text-gray-800">Watermelon Dating</h1>
@@ -36,9 +36,9 @@ export default function HomePage() {
         </nav>
 
         <div className="flex items-center gap-4">
-          <Button className="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2  rounded-md shadow-lg transition-colors">
+          <button className="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-md shadow-lg transition-colors">
             Join the Waitlist
-          </Button>
+          </button>
           <Button variant="ghost" className="text-gray-600 hover:text-gray-800">
             Join Talent Waitlist
           </Button>
@@ -180,8 +180,8 @@ export default function HomePage() {
         {/* The Watermelon Dating Vows - Rich Content Section */}
         <section id="vows" className="py-24">
           <div className="text-center mb-16">
-            <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-pink-400 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">
-              🍉
+            <div className="w-16 h-16 rounded-2xl overflow-hidden mx-auto mb-6">
+              <img src="/logo.png" alt="Watermelon Dating Logo" className="w-full h-full object-cover" />
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">The Watermelon Dating Vows</h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
@@ -264,8 +264,8 @@ export default function HomePage() {
         {/* Why Watermelon Dating Exists - Rich Narrative Section */}
         <section id="why-we-exist" className="py-24 bg-gradient-to-r from-red-5 to-pink-5 rounded-3xl">
           <div className="max-w-4xl mx-auto px-12 text-center space-y-8">
-            <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto text-3xl">
-              🍉
+            <div className="w-20 h-20 rounded-2xl overflow-hidden mx-auto">
+              <img src="/logo.png" alt="Watermelon Dating Logo" className="w-full h-full object-cover" />
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-800">Why Watermelon Dating Exists</h2>
             <div className="space-y-6 text-lg text-gray-700 leading-relaxed text-left">
@@ -290,8 +290,8 @@ export default function HomePage() {
         {/* Success Stories - REPLACED WITH JOIN US FROM THE START */}
         <section id="join-us" className="py-24">
           <div className="text-center mb-16">
-            <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <span className="text-2xl">✊</span>
+            <div className="w-16 h-16 rounded-2xl overflow-hidden mx-auto mb-6">
+              <img src="/logo.png" alt="Watermelon Dating Logo" className="w-full h-full object-cover" />
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">Join Us From the Start</h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
@@ -358,8 +358,8 @@ export default function HomePage() {
         {/* Careers Section */}
         <section id="careers" className="py-24">
           <div className="text-center mb-16">
-            <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <span className="text-2xl">💼</span>
+            <div className="w-16 h-16 rounded-2xl overflow-hidden mx-auto mb-6">
+              <img src="/logo.png" alt="Watermelon Dating Logo" className="w-full h-full object-cover" />
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">Careers at Watermelon Dating</h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
@@ -471,7 +471,9 @@ export default function HomePage() {
         {/* Final CTA Section */}
         <section className="py-24 bg-red-600 rounded-3xl text-white text-center">
           <div className="max-w-4xl mx-auto px-8 space-y-8">
-            <div className="w-20 h-20 bg-red-800 rounded-2xl flex items-center justify-center mx-auto text-3xl">🍉</div>
+            <div className="w-20 h-20 rounded-2xl overflow-hidden mx-auto">
+              <img src="/logo.png" alt="Watermelon Dating Logo" className="w-full h-full object-cover" />
+            </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-white">Join the Movement</h2>
             <p className="text-xl opacity-90 max-w-3xl mx-auto leading-relaxed text-white">
               Watermelon Dating isn't just an app. It's a revolution in how we love, how we connect, and how we give
