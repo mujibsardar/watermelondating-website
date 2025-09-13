@@ -7,7 +7,7 @@ services:
     region: oregon
     buildCommand: |
       corepack enable
-      pnpm install --frozen-lockfile
+      pnpm install --no-frozen-lockfile
       pnpm build
     startCommand: pnpm start -- -p $PORT
     envVars:
