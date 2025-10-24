@@ -51,6 +51,8 @@ Resend is an email API for apps. It avoids SMTP authentication errors (like Gmai
 
 ### Namecheap: Add Resend DNS
 
+**Note:** Namecheap Email Forwarding (host **@**) and Resend records (host **send**) do not conflict. If switching to Email Forwarding hides the `send` MX, use **Custom MX** and add both: one for **@** (forwarding) and one for **send** (Resend).
+
 1. **Advanced DNS → Mail Settings:** switch **Email Forwarding → Custom MX** and Save.
 2. **MX Records:** Add
    - Host: `send`
