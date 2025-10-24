@@ -113,14 +113,22 @@ export default function HomePage() {
               <p className="text-sm text-gray-500 max-w-md">
                 ❤️‍🩹 Every connection funds safety, healing, and a brighter future for Palestinian orphans.
               </p>
+              <p className="text-gray-700 font-medium text-base max-w-md">
+                Dates by default: every match gets a calendar invite. One free reschedule—then it expires.
+              </p>
             </div>
 
-            <button
-              onClick={() => setShowWaitlistModal(true)}
-              className="bg-red-500 hover:bg-red-600 text-white font-semibold px-8 py-6 text-lg rounded-full shadow-lg transition-colors"
-            >
-              Join the Waitlist
-            </button>
+            <div className="space-y-3">
+              <button
+                onClick={() => setShowWaitlistModal(true)}
+                className="bg-red-500 hover:bg-red-600 text-white font-semibold px-8 py-6 text-lg rounded-full shadow-lg transition-colors"
+              >
+                Join the Waitlist
+              </button>
+              <a href="#dates-by-default" className="block text-center text-sm text-gray-600 hover:text-gray-800 underline">
+                How it works →
+              </a>
+            </div>
           </div>
 
           {/* Right Content - Phone Mockups */}
@@ -218,12 +226,42 @@ export default function HomePage() {
               <span className="text-white font-bold text-lg">🛡️</span>
             </div>
             <h3 className="text-xl font-bold text-gray-800 mb-3">Built Different</h3>
+            <p className="text-gray-600 text-sm leading-relaxed mb-2">
+              Dates by default → Every match auto-prompts you to pick a time/place. One reschedule allowed to prevent ghosting.
+            </p>
             <p className="text-gray-600 text-sm leading-relaxed">
               Designed to fix what's broken in dating apps. No ghosting, no paywalls, no bots — only real people, real
               love, real purpose.
             </p>
           </Card>
         </div>
+
+        {/* Dates by Default Section */}
+        <section id="dates-by-default" className="py-24">
+          <div className="max-w-4xl mx-auto text-center space-y-8">
+            <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-pink-400 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">
+              📅
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">Dates by Default</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Matches should lead to real meetings—not dead chats. When you match, we open a scheduler to pick a time and vibe (coffee, walk, museum). You can reschedule once. If either person cancels again, the match closes. Simple, respectful, momentum-friendly.
+            </p>
+            <div className="grid md:grid-cols-3 gap-6 mt-12">
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6">
+                <div className="text-2xl mb-3">📅</div>
+                <h3 className="font-bold text-gray-800 mb-2">Auto scheduler after every match</h3>
+              </div>
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6">
+                <div className="text-2xl mb-3">🔄</div>
+                <h3 className="font-bold text-gray-800 mb-2">One reschedule per match</h3>
+              </div>
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6">
+                <div className="text-2xl mb-3">✋</div>
+                <h3 className="font-bold text-gray-800 mb-2">Close loop if plans stall = no ghosting</h3>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* The Watermelon Dating Vows - Rich Content Section */}
         <section id="vows" className="py-24">
@@ -242,51 +280,56 @@ export default function HomePage() {
             {[
               {
                 num: "1",
+                title: "We Turn Matches Into Meetings",
+                desc: "Every match must pick a time. One reschedule—respect people's time, build real connections. Matches that stay in chat die. We enforce momentum by turning every match into a real meeting.",
+              },
+              {
+                num: "2",
                 title: "Truth Is Attractive — Lies Are Not Welcome",
                 desc: "Too many dating apps are filled with catfish, fake jobs, and staged realities. We say enough. Who you are on the app is who you are in real life. No illusions. No games. Just truth — because authenticity is the only filter that matters.",
               },
               {
-                num: "2",
+                num: "3",
                 title: "We're Not Playing Ghostbusters — Stop Ghosting",
                 desc: "Dating apps made people disposable. Matches vanish, conversations die, and feelings get discarded like yesterday's news. But every profile here belongs to a real human being with dreams, hopes, and emotions. Ghosting isn't clever — it's cruel.",
               },
               {
-                num: "3",
+                num: "4",
                 title: "This Is Not TikTok — Every Swipe Is a Human Being",
                 desc: "We are not entertainment. We are not infinite scroll. We are not shallow validation games. Every swipe you make is a living, breathing human being who could change your life. Slow down. Be present.",
               },
               {
-                num: "4",
+                num: "5",
                 title: "Love Can't Exist Without Safety",
                 desc: "Safety isn't just a feature — it's the foundation. Too many apps turn a blind eye to harassment, unsolicited pictures, and toxic behavior. We don't. Boundaries are sacred. Harassment will never be tolerated.",
               },
               {
-                num: "5",
+                num: "6",
                 title: "Real Accounts",
                 desc: "You're tired of bots. You're tired of scams. You're tired of catfish hiding behind fake pictures and fake lives. So are we. On Watermelon Dating, every profile is verified. Every face is a real person.",
               },
               {
-                num: "6",
+                num: "7",
                 title: "Shared Values Over Shallow Matches",
                 desc: "Attraction matters. Chemistry matters. But what happens when beauty fades, when the spark shifts, when life tests your bond? Shared values are what last. We connect people whose hearts beat for Palestinian liberation.",
               },
               {
-                num: "7",
+                num: "8",
                 title: "Love Without a Price Tag",
                 desc: "Other apps have turned love into a marketplace. Pay to be seen. Pay to get boosted. But real love doesn't belong behind a paywall. At Watermelon Dating, visibility is fair. Everyone deserves the same chance to be seen.",
               },
               {
-                num: "8",
+                num: "9",
                 title: "Quality Over Quantity",
                 desc: "Swiping endlessly doesn't make people closer. It makes them empty. Dating apps encourage chasing numbers, but numbers don't make love. Fewer swipes. Deeper chats. More meaningful dates.",
               },
               {
-                num: "9",
+                num: "10",
                 title: "The Best Part: Every Match Supports Palestinian Orphans",
                 desc: "What makes Watermelon Dating different isn't just the love you'll find — it's the love you'll give. Every match supports Palestinian orphans. Your story of love directly funds stories of survival, healing, and hope.",
               },
               {
-                num: "10",
+                num: "11",
                 title: "Hope Lives in Every Love Story",
                 desc: "In the end, this app isn't just about dating. It's about rebuilding lives. It's about creating hope in a world that desperately needs it. Together, we are proving that love isn't selfish — it's powerful.",
               },
@@ -551,6 +594,27 @@ export default function HomePage() {
             <p className="text-sm opacity-75 text-white">
               Free to join • 100% of profits donated • Start making a difference today
             </p>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-24 bg-white/50 rounded-3xl">
+          <div className="max-w-3xl mx-auto px-6">
+            <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Frequently Asked Questions</h2>
+            <div className="space-y-6">
+              <div className="bg-white rounded-lg p-6 shadow-sm">
+                <h3 className="font-bold text-gray-800 mb-2">What if I need to reschedule?</h3>
+                <p className="text-gray-600">
+                  Each match includes one reschedule. If plans fall through again, the match closes so you're never stuck in endless chats.
+                </p>
+              </div>
+              <div className="bg-white rounded-lg p-6 shadow-sm">
+                <h3 className="font-bold text-gray-800 mb-2">Can I opt out of instant scheduling?</h3>
+                <p className="text-gray-600">
+                  Yes. You can delay for 24 hours once. After that, we'll nudge both of you to pick a time.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
       </main>
