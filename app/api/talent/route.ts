@@ -37,6 +37,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
+    const ADMIN = process.env.ADMIN_EMAIL || "admin@watermelondating.com"
+
     const subject = `Talent application: ${name}`
     const text = `New talent application\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`
 
@@ -51,11 +53,14 @@ export async function POST(req: Request) {
     }
 
     await sendMail({
-      to: "admin@watermelondating.com",
+      to: ADMIN,
       subject,
       text,
+      replyTo: email,
       attachments,
     })
+
+    console.log("/api/talent → sent to", ADMIN)
 
     return NextResponse.json({ ok: true })
   } catch (err) {
