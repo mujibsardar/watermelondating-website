@@ -1,22 +1,35 @@
-import nodemailer, { type SendMailOptions } from "nodemailer"
+import { Resend } from "resend"
 
-export async function sendMail(
-  options: SendMailOptions & { to: string; subject: string; text: string }
-) {
-  const host = process.env.SMTP_HOST!
-  const port = Number(process.env.SMTP_PORT || 587)
-  const user = process.env.SMTP_USER!
-  const pass = process.env.SMTP_PASS!
-  const secure = port === 465
+const apiKey = process.env.RESEND_API_KEY!
+if (!apiKey) {
+  // Defer throwing until runtime to avoid build-time crash in some envs
+  console.warn("[MAILER] RESEND_API_KEY not set; emails will fail at runtime")
+}
+const resend = apiKey ? new Resend(apiKey) : (null as unknown as Resend)
+const FROM = process.env.EMAIL_FROM || "Watermelon Dating <onboarding@resend.dev>"
 
-  if (!host || !user || !pass) {
-    throw new Error("SMTP configuration is missing. Please set SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS.")
+export async function sendMail(opts: {
+  to: string | string[]
+  subject: string
+  text: string
+  replyTo?: string
+  attachments?: { filename: string; content: Buffer }[]
+}) {
+  const { to, subject, text, replyTo, attachments } = opts
+  if (!resend) throw new Error("[MAILER] Missing RESEND_API_KEY")
+  const result = await resend.emails.send({
+    from: FROM,
+    to: Array.isArray(to) ? to : [to],
+    subject,
+    text,
+    reply_to: replyTo,
+    attachments,
+  })
+  if ((result as any).error) {
+    console.error("[MAILER] Resend error", (result as any).error)
+    throw new Error((result as any).error?.message || "Email send failed")
   }
-
-  const transporter = nodemailer.createTransport({ host, port, secure, auth: { user, pass } })
-  const from = process.env.SMTP_FROM || user
-
-  return transporter.sendMail({ from, ...options })
+  return result
 }
 
 
