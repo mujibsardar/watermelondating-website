@@ -1,47 +1,35 @@
-import nodemailer, { Transporter } from "nodemailer"
+import { Resend } from "resend"
 
-let cachedTransporter: Transporter | null = null
-
-function createTransporter(): Transporter {
-  const host = process.env.SMTP_HOST
-  const port = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : 587
-  const user = process.env.SMTP_USER
-  const pass = process.env.SMTP_PASS
-
-  if (!host || !user || !pass) {
-    throw new Error("SMTP configuration is missing. Please set SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS.")
-  }
-
-  return nodemailer.createTransport({
-    host,
-    port,
-    secure: port === 465,
-    auth: { user, pass },
-  })
+const apiKey = process.env.RESEND_API_KEY!
+if (!apiKey) {
+  // Defer throwing until runtime to avoid build-time crash in some envs
+  console.warn("[MAILER] RESEND_API_KEY not set; emails will fail at runtime")
 }
+const resend = apiKey ? new Resend(apiKey) : (null as unknown as Resend)
+const FROM = process.env.EMAIL_FROM || "Watermelon Dating <onboarding@resend.dev>"
 
-export function getTransporter(): Transporter {
-  if (!cachedTransporter) {
-    cachedTransporter = createTransporter()
-  }
-  return cachedTransporter
-}
-
-export async function sendMail(options: {
-  to: string
+export async function sendMail(opts: {
+  to: string | string[]
   subject: string
   text: string
-  html?: string
-  attachments?: Array<{ filename: string; content: Buffer; contentType?: string }>
+  replyTo?: string
+  attachments?: { filename: string; content: Buffer }[]
 }) {
-  const transporter = getTransporter()
-
-  const from = process.env.SMTP_FROM || "Watermelon Dating <no-reply@watermelondating.com>"
-
-  return transporter.sendMail({
-    from,
-    ...options,
+  const { to, subject, text, replyTo, attachments } = opts
+  if (!resend) throw new Error("[MAILER] Missing RESEND_API_KEY")
+  const result = await resend.emails.send({
+    from: FROM,
+    to: Array.isArray(to) ? to : [to],
+    subject,
+    text,
+    reply_to: replyTo,
+    attachments,
   })
+  if ((result as any).error) {
+    console.error("[MAILER] Resend error", (result as any).error)
+    throw new Error((result as any).error?.message || "Email send failed")
+  }
+  return result
 }
 
 
