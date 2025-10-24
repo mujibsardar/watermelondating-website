@@ -93,19 +93,26 @@ pnpm dev
 
 Open http://localhost:3000
 
-## Verify + Ship
+## Receive Form Emails + DNS Cutover
 
-1. Resend → Domains → Verify `watermelondating.com`.
-2. Vercel (Preview) env:
-   - `EMAIL_FROM` = `"Watermelon Dating <noreply@watermelondating.com>"`
-   - `ADMIN_EMAIL` = `<your inbox>`
-   - `RESEND_API_KEY` = `<unchanged>`
-   - Redeploy.
-3. Test:
-   - curl JSON to `/api/waitlist` → 200
-   - curl multipart to `/api/talent` → 200
-4. Copy envs to **Production**, merge to `main`, wait for build, re-test on prod.
-5. Rollback plan: switch DNS back to Render if needed.
+### Receive Form Emails
+
+1. Vercel → Settings → **Environment Variables**:
+   - `ADMIN_EMAIL = watermelondatingapp@gmail.com`
+   - `EMAIL_FROM = "Watermelon Dating <noreply@watermelondating.com>"`
+   - `RESEND_API_KEY = re_...`
+   - Add in **Preview** now and **Production** before merge.
+2. Redeploy the latest build and submit the form (or curl). Check the Gmail inbox and Spam/Promotions once.
+
+### Point Domain to Vercel
+
+1. Vercel → Project → Settings → **Domains** → Add `www.watermelondating.com` and `watermelondating.com`.
+2. Namecheap → **Advanced DNS**:
+   - `www` → **CNAME** → `cname.vercel-dns.com`
+   - `@` → **A/ALIAS** → values shown by Vercel for apex
+   - Leave Resend TXT/MX/DMARC records untouched.
+3. Wait for **Verified** + **SSL Active** in Vercel, then test `https://www.watermelondating.com` and `https://watermelondating.com`.
+4. Merge to `main` to build **Production**.
 
 ## Tech Stack
 
