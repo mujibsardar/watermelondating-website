@@ -93,6 +93,20 @@ pnpm dev
 
 Open http://localhost:3000
 
+## Verify + Ship
+
+1. Resend → Domains → Verify `watermelondating.com`.
+2. Vercel (Preview) env:
+   - `EMAIL_FROM` = `"Watermelon Dating <noreply@watermelondating.com>"`
+   - `ADMIN_EMAIL` = `<your inbox>`
+   - `RESEND_API_KEY` = `<unchanged>`
+   - Redeploy.
+3. Test:
+   - curl JSON to `/api/waitlist` → 200
+   - curl multipart to `/api/talent` → 200
+4. Copy envs to **Production**, merge to `main`, wait for build, re-test on prod.
+5. Rollback plan: switch DNS back to Render if needed.
+
 ## Tech Stack
 
 - Next.js 14 (App Router)
