@@ -39,10 +39,34 @@ Resend is an email API for apps. It avoids SMTP authentication errors (like Gmai
 
    Expect `200 {"ok":true}` and an email at `admin@watermelondating.com`.
 
-## Verify Domain Later
+## Rollback to Render (Quick Restore)
 
-- Resend → Domains → Add `watermelondating.com` → add DNS (DKIM/SPF/Return-Path) they provide.
-- Change `EMAIL_FROM` to `noreply@watermelondating.com` after verification.
+1. Namecheap DNS → set:
+   - `www` → CNAME back to Render host.
+   - `@` (apex) → ALIAS/A back to Render records.
+2. Wait for DNS to take effect; confirm forms work on Render.
+3. Keep Vercel project paused until we complete domain email setup.
+
+## Finish Vercel Email (Resend, Production)
+
+1. Resend → **Domains** → Add `watermelondating.com` → add the DKIM/SPF/Return-Path DNS they show.
+2. When Verified:
+   - Vercel ENV (Preview + Production):
+     - `RESEND_API_KEY = re_...`
+     - `EMAIL_FROM = "Watermelon Dating <noreply@watermelondating.com>"`
+     - `ADMIN_EMAIL = admin@watermelondating.com`
+3. Redeploy latest build; test:
+   ```bash
+   curl -H "Content-Type: application/json" \
+     -d '{"email":"test@example.com","name":"Test"}' \
+     https://<preview-or-prod>/api/waitlist
+   curl -i -X POST \
+     -F "name=Test User" -F "email=test@example.com" \
+     -F "phone=123-456-7890" \
+     -F "resume=@/tmp/resume.pdf;type=application/pdf" \
+     https://<preview-or-prod>/api/talent
+   ```
+   Expect `200 {"ok":true}` and email delivery.
 
 ## Getting Started
 
