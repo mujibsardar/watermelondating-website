@@ -49,7 +49,23 @@ Resend is an email API for apps. It avoids SMTP authentication errors (like Gmai
 
 ## Finish Vercel Email (Resend, Production)
 
-1. Resend → **Domains** → Add `watermelondating.com` → add the DKIM/SPF/Return-Path DNS they show.
+### Namecheap: Add Resend DNS
+
+1. **Advanced DNS → Mail Settings:** switch **Email Forwarding → Custom MX** and Save.
+2. **MX Records:** Add
+   - Host: `send`
+   - Mail Server: `<feedback-smtp... from Resend>`
+   - Priority: `10`
+   - TTL: `Automatic`
+3. **Host Records → TXT:**
+   - Host `send` → Value `<Resend SPF: v=spf1 include:amazonses...>`
+   - Host `resend._domainkey` → Value `<Resend DKIM p=...>`
+   - Host `_dmarc` → Value `v=DMARC1; p=none;`
+4. **Verify in Resend**. Do **not** change `@` (ALIAS) or `www` (CNAME).
+
+### Vercel: Enable Production Email
+
+1. Resend → **Domains** → Add `watermelondating.com` → copy DNS values above.
 2. When Verified:
    - Vercel ENV (Preview + Production):
      - `RESEND_API_KEY = re_...`
