@@ -28,12 +28,16 @@ export async function POST(req: Request) {
     const { name = "", email = "", phone = "" } = await parseBody(req)
     if (!email) return NextResponse.json({ error: "Missing email" }, { status: 400 })
 
+    const ADMIN = process.env.ADMIN_EMAIL || "admin@watermelondating.com"
+
     await sendMail({
-      to: "admin@watermelondating.com",
+      to: ADMIN,
       subject: `Waitlist signup: ${name || email}`,
       text: `New waitlist signup\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`,
       replyTo: email,
     } as any)
+
+    console.log("/api/waitlist → sent to", ADMIN)
 
     return NextResponse.json({ ok: true })
   } catch (err) {

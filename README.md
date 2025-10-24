@@ -9,6 +9,23 @@ Resend is an email API for apps. It avoids SMTP authentication errors (like Gmai
 **Quick test**: Use `onboarding@resend.dev` (works out of the box).  
 **Production**: Verify your domain and use `noreply@watermelondating.com`.
 
+## Email Reset → DNS Cutover
+
+1. **Env (Preview)**:
+   - `RESEND_API_KEY` = `re_...`
+   - `EMAIL_FROM` = `"Watermelon Dating <noreply@watermelondating.com>"` (must be verified in Resend)
+   - `ADMIN_EMAIL` = `watermelondatingapp@gmail.com` (pick ONE inbox)
+2. **Redeploy Preview** and submit a form.
+   - Vercel Logs must show: `/api/* → sent to watermelondatingapp@gmail.com` and `[MAILER] sent ok { id: ... }`.
+   - Resend → Emails should show **Delivered**. If **Suppressed/Bounced**, remove the address in Resend → **Suppressions**, submit again.
+   - Check Gmail Inbox/Spam/Promotions. Add a filter "Never send to spam" for `noreply@watermelondating.com`.
+3. **Promote**: copy the same envs to **Production**, merge to `main`, test again on prod URL.
+4. **DNS → Vercel (Namecheap)**:
+   - `www` → CNAME → `cname.vercel-dns.com`
+   - `@` (apex) → A/ALIAS per Vercel Domains page
+   - Keep Resend records (host **send**, `resend._domainkey`, `_dmarc`).
+5. **(Optional)** When forwarding is stable, you may switch ADMIN_EMAIL to `admin@watermelondating.com`.
+
 ## Configure Resend on Vercel
 
 1. Create account at [resend.com](https://resend.com) → API Keys → Create → copy `re_...`.
@@ -16,6 +33,7 @@ Resend is an email API for apps. It avoids SMTP authentication errors (like Gmai
 2. Vercel → Project → Settings → Environment Variables (Preview now, Production before merge):
    - `RESEND_API_KEY` = `re_...`
    - `EMAIL_FROM` = `"Watermelon Dating <onboarding@resend.dev>"`
+   - `ADMIN_EMAIL` = `watermelondatingapp@gmail.com`
 
 3. Deployments → … → Redeploy.
 

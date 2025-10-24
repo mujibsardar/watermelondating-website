@@ -29,6 +29,7 @@ export async function sendMail(opts: {
     console.error("[MAILER] Resend error", (result as any).error)
     throw new Error((result as any).error?.message || "Email send failed")
   }
+  console.log("[MAILER] sent ok", { id: (result as any).data?.id, to })
   return result
 }
 
